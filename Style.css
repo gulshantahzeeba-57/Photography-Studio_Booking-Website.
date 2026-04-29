@@ -5,7 +5,7 @@ html {
 /* ===== HERO + HEADER SECTION ===== */
 .hero-header {
   min-height: 100vh; /* cover full viewport */
-  background-image: url("./images/hero3.jpg"); /* main image for both */
+  background-image: url("./Images/hero3.jpg"); /* main image for both */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -559,7 +559,7 @@ html {
     rgba(0, 0, 0, 0.747)
      /* rgba(0,0,0,0.2) */
      ),
-     url("./images/booking3.jpg");
+     url("./Images/booking3.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
