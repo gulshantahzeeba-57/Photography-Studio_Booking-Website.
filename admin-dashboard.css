@@ -52,7 +52,7 @@ nav a:hover {
     border-radius: 20%;
      background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
 }
 
 .btn-danger:hover{
@@ -69,7 +69,7 @@ nav a:hover {
 /* ===== HEADER BOX ===== */
 .header-box h1,
 #todayDate {
-    color: #FDFBD4; /* contrast against background */
+    color: #ffffff; /* contrast against background */
 }
 
 /* ===== TABLE ===== */
@@ -143,7 +143,7 @@ nav a:hover {
 .btn-reject  {
   background-color: rgba(29, 29, 29, 0.781);
   border: 2px solid #000000;
-  color: #FDFBD4;
+  color: #ffffff;
   padding: 10px 25px;
   border-radius: 30px;
   cursor: pointer;
