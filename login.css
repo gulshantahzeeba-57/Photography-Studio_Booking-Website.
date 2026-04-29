@@ -1,0 +1,185 @@
+html {
+  scroll-behavior: smooth;
+}
+/* HEADER */
+/* ===== HEADER ===== */
+header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;  /* better full width */
+    height: 80px; /* fixed height */
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.3); 
+    backdrop-filter: blur(5px); 
+    color: white;
+    z-index: 1000; /* make sure it stays on top */
+}
+
+/* ===== LOGO ===== */
+.logo-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #000000;
+}
+
+/* ===== NAVIGATION ===== */
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 150px;
+}
+
+nav a:hover {
+    color: #d15252;
+}
+
+/* ===== BODY / BACKGROUND ===== */
+body { 
+    min-height: 100vh;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)
+    ),
+    url("./images/login.jpg"); /* main background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+
+/* LOGIN BOX */
+.login-box { 
+     /* background: rgba(150, 171, 103, 0.275);  */
+        background-color: #ffffff2a;
+  color:  #000000;
+  border: 2px solid #080a02;  
+    padding: 40px;
+    margin-top: 10%; 
+    border-radius: 30px; 
+    text-align: center; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
+    width: 350px;
+}
+
+/* HEADING */
+h2 { 
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #000000;
+}
+
+/* INPUTS */
+input { 
+    width: 100%; 
+    margin: 15px 0; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: none; 
+    font-size: 15px;
+    box-sizing: border-box;
+}
+
+/* BUTTON */
+button { 
+    background-color: rgba(29, 29, 29, 0.781);
+    border: 2px solid #000000;  
+    color: #FDFBD4;
+    padding: 12px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    width: 100%; 
+    border-radius: 20px; 
+    font-size: 16px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+     background-color: #000000;
+  border: 2px solid #d15252;  
+}
+
+/* PLACEHOLDER */
+::placeholder {
+    color: #888;
+}
+
+
+/* ===== MOBILE VIEW (LOGIN PAGE) ===== */
+@media (max-width: 768px) {
+
+    /* HEADER FIX */
+    header {
+        height: auto;
+        padding: 10px 15px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+
+    /* LOGO SMALL */
+    .logo-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* NAV FIX */
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        margin: 0; /* remove that 150px issue */
+        font-size: 14px;
+    }
+
+    /* BODY FIX (important for fixed header) */
+    body {
+        padding-top: 100px; /* prevent overlap with header */
+        align-items: flex-start; /* better flow on mobile */
+    }
+
+    /* LOGIN BOX */
+    .login-box {
+        width: 90%;
+        max-width: 320px;
+        padding: 25px;
+        margin-top: 200px;
+        border-radius: 20px;
+    }
+
+    /* HEADING */
+    h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* INPUTS */
+    input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* BUTTON */
+    button {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 15px;
+    }
+}

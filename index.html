@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MoonShot Studios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="Style.css">
+  <link rel="icon" type="image/png" href="./Images/site_logo.png">
+</head>
+<body>
+  
+<!-- HERO + HEADER COMBINED -->
+<section id = "hero-header" class="hero-header">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <img src="./Images/MoonShotStudioLogo4.png" alt="MoonShot Studio Logo">
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="#hero-header">Home</a></li>
+        <li><a href="#Categories">Categories</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#Studios">Studios</a></li>
+        <li><a href="#about-us">About-us</a></li>
+        <li><a href="#booking">Booking</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="login.html">OwnerLogin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO CONTENT -->
+  <div class="hero-content">
+    <h2>Find & Book Photography Studios</h2>
+    <p>Discover professional photographers across the country</p>
+    <button onclick="document.getElementById('packages').scrollIntoView({behavior: 'smooth'});">
+      Book Your Studio
+    </button>
+  </div>
+</section>
+
+
+<!-- CATEGORIESS-->
+<section id="Categories" class="categories">
+  <h2>Photography Categories</h2>
+    <p class="categories-sub">
+    Choose the type of photography you are looking for
+  </p>
+  <div class="categories-cards">
+
+    <!-- Wedding  -->
+    <div class="card">
+      <h3>Wedding Photography</h3>
+      <p>Professional studios for weddings & receptions.</p>
+      <button onclick="openModal('weddingModal')">View Gallery</button>
+      
+    </div>
+
+    <!-- Portrait -->
+    <div class="card">
+      <h3>Portrait Photography</h3>
+      <p>Personal, family & corporate portrait sessions.</p>
+      <button onclick="openModal('portraitModal')">View Gallery</button>
+    </div>
+
+    <!-- Event -->
+    <div class="card">
+      <h3>Event Photography</h3>
+      <p>Coverage for events, concerts & parties.</p>
+      <button onclick="openModal('eventModal')">View Gallery</button>
+    </div>
+
+    <!-- Commercial -->
+     <div class="card">
+      <h3>Commercial Photography</h3>
+      <p>Brand, product & business photography.</p>
+      <button onclick="openModal('commercialModal')">View Gallery</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== PACKAGES SECTION ===== -->
+
+<section id="packages" class="packages">
+  <h2>Photography Packages</h2>
+  <p class="packages-sub">Choose a package that fits your needs</p>
+
+  <div class="package-cards">
+
+    <div class="package-card">
+      <h3>Basic Package</h3>
+      <p class="price">PKR 25,000</p>
+      <ul>
+        <li> 2 Hours Shoot</li>
+        <li> 50 Edited Photos</li>
+        <li> Online Delivery</li>
+      </ul>
+      <button onclick="selectPackage('Basic Package')">
+        Select Package
+      </button>
+    </div>
+
+    <div class="package-card">
+      <h3>Standard Package</h3>
+      <p class="price">PKR 50,000</p>
+      <ul>
+        <li> 5 Hours Shoot</li>
+        <li> 150 Edited Photos</li>
+        <li> Album Included</li>
+      </ul>
+      <button onclick="selectPackage('Standard Package')">
+        Select Package
+      </button>
+    </div>
+
+    <div class="package-card">
+      <h3>Premium Package</h3>
+      <p class="price">PKR 90,000</p>
+      <ul>
+        <li> Full Day Coverage</li>
+        <li> Unlimited Photos</li>
+        <li> Album + Video</li>
+      </ul>
+      <button onclick="selectPackage('Premium Package')">
+        Select Package
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PACKAGE POPUP ================= -->
+<div id="packagePopup" class="package-modal">
+    <span class="close" onclick="closePackagePopup('packagePopup')">&times;</span>
+  <div class="package-modal-content">
+    <h2>Package Selected</h2>
+<p id="selectedPackageText" class="selected-package"></p>
+<button onclick="goToStudios()">Proceed to Booking</button>
+</div>
+</div>
+
+<!-- ===== STUDION ===== -->
+
+<section id="Studios" class="studios">
+  <h2>Featured Studios in Pakistan</h2>
+  <p class="studios-sub">
+    Discover trusted photography studios across Pakistan
+  </p>
+
+  <div class="studio-cards">
+
+    <div class="studio-card">
+      <img src="./Images/studio1.png">
+      <h3>MoonAura Studio</h3>
+      <p> Lahore</p>
+      <p> 4.8 Rating</p>
+      <p> From PKR 50,000</p>
+      <button class="book-btn" onclick="openStudioDetail('studioDetailModal1','MoonAura Studio','Lahore')">
+        View Studio</button>
+    </div>
+
+    <div class="studio-card">
+      <img src="./Images/studio2.jpg">
+      <h3>Noor Frame</h3>
+      <p> Karachi</p>
+      <p> 4.7 Rating</p>
+      <p> From PKR 45,000</p>
+      <button class="book-btn" onclick="openStudioDetail('studioDetailModal2','Noor Frame','Karachi')">
+        View Studio</button>
+    </div>
+
+    <div class="studio-card">
+      <img src="./Images/studio3.jpg">
+      <h3>WhiteMinar Studio</h3>
+      <p> Islamabad</p>
+      <p> 4.9 Rating</p>
+      <p>  From PKR 60,000</p>
+      <button class="book-btn" onclick="openStudioDetail('studioDetailModal3','WhiteMinar Studio','Islamabad')">
+        View Studio</button>
+    </div>
+
+    <div class="studio-card">
+      <img src="./Images/studio4.jpg">
+      <h3>Hunza Visuals</h3>
+      <p> Hunza</p>
+      <p> 4.9 Rating</p>
+      <p> From PKR 70,000</p>
+      <button class="book-btn" onclick="openStudioDetail('studioDetailModal4','Hunza Visuals','Hunza')">
+        View Studio</button>
+    </div>
+
+    <div class="studio-card">
+      <img src="./Images/studio5.jpg">
+      <h3>Mehfil Clicks</h3>
+      <p> Multan</p>
+      <p> 4.6 Rating</p>
+      <p> From PKR 40,000</p>
+      <button class="book-btn" 
+      onclick="openStudioDetail
+      ('studioDetailModal5','Mehfil Clicks','Multan')">
+        View Studio</button>
+        
+</button>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== ABOUT US SECTION ===== -->
+<section id="about-us" class="about">
+  <div class="about-container">
+    <div class="about-image">
+      <img src="./Images/about-us.jpg" alt="About MoonShot Studio">
+    </div>
+    <div class="about-content">
+      <h2>About MoonShot Studio</h2>
+      <p>
+        MoonShot Studio is dedicated to capturing moments that last a lifetime. 
+        We specialize in wedding, portrait, event, and commercial photography, 
+        bringing creativity and precision to every shoot.
+      </p>
+      <p>
+        We believe every picture tells a story, and we are committed to making your story unforgettable. 
+        Serving clients, we combine high-quality equipment, artistic vision, 
+        and personalized service for a perfect photography experience.
+      </p>
+      <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
+        Contact Us
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STUDIO MODAL ===== -->
+
+<!-- MoonAura Studio -->
+<div id="studioDetailModal1" class="modal">
+  <span class="close" onclick="closeStudioDetail('studioDetailModal1')">&times;</span>
+  <div class="modal-content studio-detail">
+    <h2>MoonAura Studio</h2>
+    <p> Lahore</p>
+    <p class="studio-desc">High-quality wedding & portrait photography.</p>
+
+    <div class="studio-gallery">
+      <img src="./Images/moonaura1.jpg">
+      <img src="./Images/moonaura2.jpg">
+      <img src="./Images/moonaura3.jpg">
+      <img src="./Images/moonaura4.jpg">
+    </div>
+
+    <ul class="studio-services">
+      <li>Wedding Photography</li>
+      <li>Portrait Photography</li>
+      <li>Event Coverage</li>
+    </ul>
+
+<button class="book-btn"
+onclick="bookStudioAndClose('studioDetailModal1','MoonAura Studio','Lahore')">
+  Book This Studio
+</button>
+  </div>
+</div>
+
+<!-- Noor Frame -->
+<div id="studioDetailModal2" class="modal">
+  <span class="close" onclick="closeStudioDetail('studioDetailModal2')">&times;</span>
+  <div class="modal-content studio-detail">
+    <h2>Noor Frame</h2>
+    <p> Karachi</p>
+    <p class="studio-desc">High-quality wedding & portrait photography.</p>
+
+    <div class="studio-gallery">
+      <img src="./Images/noorframe1.jpg">
+      <img src="./Images/noorframe2.jpg">
+      <img src="./Images/noorframe3.jpg">
+      <img src="./Images/noorframe4.jpg">
+    </div>
+
+    <ul class="studio-services">
+      <li>Wedding Photography</li>
+      <li>Portrait Photography</li>
+      <li>Event Coverage</li>
+    </ul>
+
+     <button class="book-btn" 
+     onclick="bookStudioAndClose
+     ('studioDetailModal2','Noor Frame','Karachi')">
+  Book This Studio
+</button>
+  </div>
+</div>
+
+<!-- WhiteMinar Studio -->
+<div id="studioDetailModal3" class="modal">
+  <span class="close" onclick="closeStudioDetail('studioDetailModal3')">&times;</span>
+  <div class="modal-content studio-detail">
+    <h2>WhiteMinar Studio</h2>
+    <p> Islamabad</p>
+    <p class="studio-desc">High-quality wedding & portrait photography.</p>
+
+    <div class="studio-gallery">
+      <img src="./Images/whiteminarstudio1.jpg">
+      <img src="./Images/whiteminarstudio2.jpg">
+      <img src="./Images/whiteminarstudio3.png">
+      <img src="./Images/whiteminarstudio4.jpg">
+    </div>
+
+    <ul class="studio-services">
+      <li>Wedding Photography</li>
+      <li>Portrait Photography</li>
+      <li>Event Coverage</li>
+    </ul>
+
+   <button class="book-btn" 
+   onclick="bookStudioAndClose
+   ('studioDetailModal3','WhiteMinar Studio','Islamabad')">
+  Book This Studio
+</button>
+  </div>
+</div>
+
+<!-- Hunza Visuals -->
+<div id="studioDetailModal4" class="modal">
+  <span class="close" onclick="closeStudioDetail('studioDetailModal4')">&times;</span>
+  <div class="modal-content studio-detail">
+    <h2>Hunza Visuals</h2>
+    <p> Hunza</p>
+    <p class="studio-desc">High-quality wedding & portrait photography.</p>
+
+    <div class="studio-gallery">
+      <img src="./Images/hunzavisuals1.jpg">
+      <img src="./Images/hunzavisuals2.jpg">
+      <img src="./Images/hunzavisuals3.jpg">
+      <img src="./Images/hunzavisuals4.jpg">
+    </div>
+
+    <ul class="studio-services">
+      <li>Wedding Photography</li>
+      <li>Portrait Photography</li>
+      <li>Event Coverage</li>
+    </ul>
+
+    <button class="book-btn" 
+    onclick="bookStudioAndClose
+    ('studioDetailModal4','Hunza Visuals','Hunza')">
+  Book This Studio
+</button>
+  </div>
+</div>
+
+<!-- Mehfil Clicks -->
+<div id="studioDetailModal5" class="modal">
+  <span class="close" onclick="closeStudioDetail('studioDetailModal5')">&times;</span>
+  <div class="modal-content studio-detail">
+    <h2>Mehfil Clicks</h2>
+    <p> Multan</p>
+    <p class="studio-desc">High-quality wedding & portrait photography.</p>
+
+    <div class="studio-gallery">
+      <img src="./Images/mehfilclicks1.jpg">
+      <img src="./Images/mehfilclicks2.jpg">
+      <img src="./Images/mehfilclicks3.jpg">
+      <img src="./Images/mehfilclicks4.jpg">
+    </div>
+
+    <ul class="studio-services">
+      <li>Wedding Photography</li>
+      <li>Portrait Photography</li>
+      <li>Event Coverage</li>
+    </ul>
+
+  <button class="book-btn" 
+  onclick="bookStudioAndClose
+  ('studioDetailModal5','Mehfil Clicks','Multan')">
+  Book This Studio
+</button>
+</button>
+  </div>
+</div>
+
+<!-- ===== BOOKING SECTION ===== -->
+
+
+<section id="booking" class="booking">
+  <h2>Book Your Studio Session</h2>
+  <form id="bookingForm" class="booking-form">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    
+    <textarea id="packageField" readonly placeholder="Selected Package" required></textarea>
+    
+    <input type="date" id="date" required>
+    <input type="time" id="time" required> 
+    
+    <select id="category" required>
+      <option value="">Select Category</option>
+      <option value="Wedding">Wedding Photography</option>
+      <option value="Portrait">Portrait Photography</option>
+      <option value="Event">Event Photography</option>
+    </select>
+
+    <textarea class="booking-studio-box" id="studioField" readonly placeholder="Selected Studio" required></textarea>
+    
+    <textarea id="additionalDetails" placeholder="Additional Details" rows="4"></textarea>
+    <button type="submit">Submit Booking</button>
+    
+    <p id="selectedStudioText"></p>
+    <p id="selectedPackageText" style="display:none;"></p>
+  </form>
+</section>
+
+
+
+
+
+
+<!-- Booking Success Popup -->
+<div id="bookingPopup" class="popup">
+  <div class="popup-content">
+    <span class="popup-close" onclick="closePopup()">&times;</span>
+    <h2>Booking Successful.</h2>
+    <p>Studio has successfully been booked.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+<div id="weddingModal" class="modal">
+  <span class="close" onclick="closeModal('weddingModal')">&times;</span>
+  <div class="modal-content">
+    <img src="./Images/wedding1.jpg">
+    <img src="./Images/wedding2.jpg">
+    <img src="./Images/wedding3.jpg">
+    <img src="./Images/wedding4.jpg">
+    <img src="./Images/wedding5.jpg">
+    <img src="./Images/wedding6.png">
+    <img src="./Images/wedding7.jpg">
+    <img src="./Images/wedding8.png">
+  </div>
+</div>
+
+<div id="portraitModal" class="modal">
+  <span class="close" onclick="closeModal('portraitModal')">&times;</span>
+  <div class="modal-content">
+    <img src="./Images/portrait1.png">
+    <img src="./Images/portrait2.png">
+    <img src="./Images/portrait3.png">
+    <img src="./Images/portrait4.png">
+    <img src="./Images/portrait5.png">
+    <img src="./Images/portrait6.png">
+    <img src="./Images/portrait7.png">
+    <img src="./Images/portrait8.png">
+    <img src="./Images/portrait9.jpg">
+    <img src="./Images/portrait10.jpg">
+
+  </div>
+</div>
+
+<div id="eventModal" class="modal">
+  <span class="close" onclick="closeModal('eventModal')">&times;</span>
+  <div class="modal-content">
+    <img src="./Images/event1.png">
+    <img src="./Images/event2.png">
+    <img src="./Images/event3.png">
+    <img src="./Images/event4.png">
+    <img src="./Images/event5.png">
+    <img src="./Images/event6.png">
+    <img src="./Images/event7.png">
+    <img src="./Images/event8.png">
+  </div>
+</div>
+
+<div id="commercialModal" class="modal">
+  <span class="close" onclick="closeModal('commercialModal')">&times;</span>
+  <div class="modal-content">
+    <img src="./Images/Commercial1.jpg">
+    <img src="./Images/Commercial2.jpg">
+    <img src="./Images/Commercial3.jpg">
+    <img src="./Images/Commercial4.jpg">
+    <img src="./Images/Commercial5.jpg">
+    <img src="./Images/Commercial6.jpg">
+    <img src="./Images/Commercial7.jpg">
+    <img src="./Images/Commercial8.jpg">
+    <img src="./Images/Commercial9.jpg">
+  </div>
+</div>
+
+
+
+<!-- ===== CONTACT SECTION =====  -->
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+
+  <div class="contact-container">
+
+    <div class="contact-box">
+      <h3>Studio Address</h3>
+      <p>Bahawalpur, Pakistan</p>
+      <p>Near DHA Phase 6</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Call Us</h3>
+      <p>+92 346 4355105</p>
+      <p>Mon – Sat (10am – 8pm)</p>
+    </div>
+
+    <div class="contact-box">
+      <h3>Email</h3>
+      <p>moonshotstudio@gmail.com</p>
+      <p>Replies within 24 hours</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== --->
+
+<footer class="footer">
+  <div class="footer-wrapper">
+
+    <div class="footer-left">
+      <h2>MoonShot Studio</h2>
+     <p>We document weddings with artistry and care, and we craft professional<br>
+      portraits with attention to detail. We photograph events to capture every <br> 
+      meaningful moment, and we deliver commercial photography that helps brands<br>
+      shine. We work closely with clients to understand their vision, ensuring<br>
+      every image tells a unique and lasting story.</p>
+
+    </div>
+
+    <div class="footer-center">
+      <h4>Site Map</h4>
+      <ul class="site-menu">
+     <li><a href="#hero-header">Home</a></li>
+      <li><a href="#Categories">Categories</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#Studios">Studios</a></li>
+      <li><a href="#about-us">About-us</a></li>
+      <li><a href="#booking">Booking</a></li>
+      <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-right">
+      <h4>Contact</h4>
+      
+      <div class="social-icons">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-line"></div>
+
+  <p class="copyright">
+    © 2026 MoonShot Studio — Crafted with passion
+  </p>
+</footer>
+
+
+  <!-- JavaScript file link -->
+   <script src="api.js"></script>
+<script src="Script.js"></script>
+</body>
+</html> 
