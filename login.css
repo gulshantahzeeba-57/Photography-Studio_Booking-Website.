@@ -46,7 +46,7 @@ body {
         rgba(0, 0, 0, 0.7),
         rgba(0, 0, 0, 0.7)
     ),
-    url("./images/login.jpg"); /* main background image */
+    url("./Images/login.jpg"); /* main background image */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
