@@ -44,7 +44,7 @@ html {
 
 .navbar ul li a {
   text-decoration: none;
-  color: #FDFBD4;
+  color: #ffffff;
   transition: color 0.3s;
 }
 
@@ -71,13 +71,13 @@ html {
   font-weight: 600;
   max-width: 800px;
   margin-bottom: 20px;
-  color: #FDFBD4;
+  color: #ffffff;
 }
 
 .hero-content p {
   font-size: 30px;
   margin-bottom: 35px;
-  color: #FDFBD4;
+  color: #ffffff;
 }
 
 .hero-content button {
@@ -87,7 +87,7 @@ html {
   /* border: none; */
  background-color: rgba(49, 51, 49, 0.3);
  border: 2px solid #ffffff;  
-  color: #FDFBD4;
+  color: #ffffff;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -154,7 +154,7 @@ html {
 .card button {
  background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   padding: 10px 20px;
   /* border: none; */
   border-radius: 25px;
@@ -279,7 +279,7 @@ html {
   border-radius: 25px;
  background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -292,7 +292,7 @@ html {
 /* ===== STUDIO DETAIL MODAL ===== */
 
 .studio-detail {
-  background: #FDFBD4;
+  background: #ffffff;
   padding: 40px;
   border-radius: 20px;
   text-align: center;
@@ -329,7 +329,7 @@ html {
   border-radius: 30px;
  background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   cursor: pointer;
 }
 .book-btn:hover {
@@ -402,7 +402,7 @@ html {
   padding: 10px 25px;
    background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #ffffff;  
-  color: #FDFBD4;
+  color: #ffffff;
   border-radius: 30px;
   cursor: pointer;
 }
@@ -481,7 +481,7 @@ html {
 .package-card button {
   background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   padding: 10px 22px;
   /* border: none; */
   border-radius: 25px;
@@ -530,7 +530,7 @@ html {
 .package-modal-content button {
   background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   padding: 10px 25px;
   border-radius: 30px;
   cursor: pointer;
@@ -577,7 +577,7 @@ html {
 .booking h2 {
   font-size: 40px;
   margin-bottom: 40px;
-  color: #FDFBD4;
+  color: #ffffff;
 }
 
 /* Form on top of image */
@@ -608,7 +608,7 @@ html {
   padding: 14px;
    background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
@@ -655,7 +655,7 @@ html {
 .popup-content button {
   background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   padding: 10px 25px;
   border-radius: 30px;
   cursor: pointer;
@@ -685,7 +685,7 @@ html {
 .contact h2 {
   font-size: 36px;
   margin-bottom: 50px;
-  color: #ffffff;;
+  color: #ffffff;
 }
 
 .contact-container {
@@ -719,7 +719,7 @@ html {
   max-width: 700px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #fdfbd4f2;
+  background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
@@ -739,7 +739,7 @@ html {
 
 #adminContent button {
   background-color: #2d4202;
-  color: #FDFBD4;
+  color: #ffffff;
   border: none;
 }
 
@@ -780,7 +780,7 @@ html {
 }
 
 .footer a {
-  color: #FDFBD4;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -964,7 +964,7 @@ th{
 .package-modal-content button {
   background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   padding: 10px 10px;
   border-radius: 30px;
   cursor: pointer;
@@ -986,7 +986,7 @@ th{
   /* ===== STUDIO DETAIL ===== */
   
 .studio-detail {
-  background: #FDFBD4;
+  background: #ffffff;
   padding: 15px;
   border-radius: 10px;
   text-align: center;
@@ -1052,7 +1052,7 @@ th{
   padding: 7px;
    background-color: rgba(29, 29, 29, 0.781);
  border: 2px solid #000000;  
-  color: #FDFBD4;
+  color: #ffffff;
   border-radius: 30px;
   font-size: 16px;
   cursor: pointer;
