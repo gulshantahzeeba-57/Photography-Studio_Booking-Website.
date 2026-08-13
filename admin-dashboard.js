@@ -1,12 +1,17 @@
-const API_URL = "http://localhost:3000/bookings";
+const API_URL = "/bookings";
+
 document.getElementById('todayDate').innerText =
     "System Date: " + new Date().toDateString();
 
 // LOAD DATA
 async function loadData() {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    displayTable(data);
+    try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        displayTable(data);
+    } catch (err) {
+        console.error("Error loading data:", err);
+    }
 }
 
 // DISPLAY TABLE
@@ -15,37 +20,38 @@ function displayTable(data) {
     tbody.innerHTML = "";
 
     data.forEach(b => {
+        // b.id ki jagah b._id use kiya hai kyunki MongoDB _id bhejta hai
         tbody.innerHTML += `
         <tr>
-            <td><strong>${b.name}</strong></td>
-            <td>${b.date}</td>
-            <td>${b.time}</td>
-            <td><span class="status ${b.status}">${b.status}</span></td>
+            <td><strong>${b.name || 'N/A'}</strong></td>
+            <td>${b.date || 'N/A'}</td>
+            <td>${b.time || 'N/A'}</td>
+            <td><span class="status ${b.status}">${b.status || 'Pending'}</span></td>
             <td class="action-btn">
             <div class="btn-group">
-                <button class="action-btn view-btn" onclick="viewDetails('${b.id}')">👁️</button>
-                <button class="action-btn approve-btn" onclick="updateStatus('${b.id}','Approved')">✓</button>
-                <button class="action-btn delete-btn" onclick="deleteBooking('${b.id}')">✕</button>
+                <button class="action-btn view-btn" onclick="viewDetails('${b._id}')">👁️</button>
+                <button class="action-btn approve-btn" onclick="updateStatus('${b._id}','Approved')">✓</button>
+                <button class="action-btn delete-btn" onclick="deleteBooking('${b._id}')">✕</button>
                 </div>
             </td>
         </tr>`;
     });
 }
 
-// UPDATE STATUS
+// UPDATE STATUS (APPROVE)
 async function updateStatus(id, status) {
     try {
         const response = await fetch(`${API_URL}/${id}`, {
-            method: "PATCH", // PATCH hi rehne den, PUT nahi karna!
+            method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: status }) 
         });
 
         if (response.ok) {
             console.log("Status updated successfully!");
-            loadData(); // Table refresh karein
+            loadData();
         } else {
-            alert("Server didn't accept. Check if ID exists.");
+            alert("Server didn't accept the update.");
         }
     } catch (error) {
         console.error("Error updating status:", error);
@@ -55,44 +61,53 @@ async function updateStatus(id, status) {
 let currentBookingId = null;
 
 async function deleteBooking(id) {
-    currentBookingId = id; // save id
-    const res = await fetch(`${API_URL}/${id}`);
-    const b = await res.json();
-
+    currentBookingId = id;
     const modal = new bootstrap.Modal(document.getElementById("deletebooking"));
     modal.show();
 }
 
-// ✅ Reject button
+// REJECT / DELETE BOOKING
 async function reject() {
     if (!currentBookingId) return;
 
-    await fetch(`${API_URL}/${currentBookingId}`, {
-        method: "DELETE"
-    });
+    try {
+        await fetch(`${API_URL}/${currentBookingId}`, {
+            method: "DELETE"
+        });
 
-    closeModal(); // modal band
-    location.reload(); // page refresh (optional)
+        // Close modal
+        const modalElement = document.getElementById("deletebooking");
+        const modalInstance = bootstrap.Modal.getInstance(modalElement);
+        if (modalInstance) modalInstance.hide();
+
+        loadData(); // Refresh table
+    } catch (error) {
+        console.error("Error deleting booking:", error);
+    }
 }
 
 // VIEW DETAILS
 async function viewDetails(id) {
-    const res = await fetch(`${API_URL}/${id}`);
-    const b = await res.json();
+    try {
+        const res = await fetch(`${API_URL}/${id}`);
+        const b = await res.json();
 
-    document.getElementById("modalContent").innerHTML = `
-        <p><strong>Name:</strong> ${b.name}</p>
-        <p><strong>Email:</strong> ${b.email}</p>
-        <p><strong>Phone:</strong> ${b.phone}</p>
-        <p><strong>Date:</strong> ${b.date}</p>
-        <p><strong>Slot:</strong> ${b.time}</p>
-        <p><strong>Category:</strong> ${b.category}</p>
-        <p><strong>Package:</strong> ${b.package}</p>
-        <p><strong>Status:</strong> ${b.status}</p>
-        <p><strong>Studio:</strong> ${b.studio}</p>
-    `;
+        document.getElementById("modalContent").innerHTML = `
+            <p><strong>Name:</strong> ${b.name || ''}</p>
+            <p><strong>Email:</strong> ${b.email || ''}</p>
+            <p><strong>Phone:</strong> ${b.phone || ''}</p>
+            <p><strong>Date:</strong> ${b.date || ''}</p>
+            <p><strong>Slot:</strong> ${b.time || ''}</p>
+            <p><strong>Category:</strong> ${b.category || ''}</p>
+            <p><strong>Package:</strong> ${b.package || ''}</p>
+            <p><strong>Status:</strong> ${b.status || ''}</p>
+            <p><strong>Studio:</strong> ${b.studio || ''}</p>
+        `;
 
-    new bootstrap.Modal(document.getElementById("detailsModal")).show();
+        new bootstrap.Modal(document.getElementById("detailsModal")).show();
+    } catch (err) {
+        console.error("Error fetching details:", err);
+    }
 }
 
 // SEARCH
@@ -100,7 +115,7 @@ async function searchData() {
     const q = document.getElementById("searchName").value.toLowerCase();
     const res = await fetch(API_URL);
     const data = await res.json();
-    displayTable(data.filter(b => b.name.toLowerCase().includes(q)));
+    displayTable(data.filter(b => b.name && b.name.toLowerCase().includes(q)));
 }
 
 // LOGOUT
