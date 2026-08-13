@@ -1,15 +1,13 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
+      "source": "/bookings",
+      "destination": "/server.js"
+    },
     {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "source": "/bookings/:path*",
+      "destination": "/server.js"
     }
   ]
 }
