@@ -6,35 +6,32 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// In-Memory Storage
 let bookings = [];
-
-// --- ROUTES ---
 
 // 1. New Booking
 app.post('/bookings', (req, res) => {
   try {
     const newBooking = {
       _id: Date.now().toString(),
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      date: req.body.date,
-      time: req.body.time,
-      category: req.body.category,
-      package: req.body.package,
-      studio: req.body.studio,
+      name: req.body.name || 'N/A',
+      email: req.body.email || 'N/A',
+      phone: req.body.phone || 'N/A',
+      date: req.body.date || 'N/A',
+      time: req.body.time || 'N/A',
+      category: req.body.category || 'N/A',
+      package: req.body.package || 'N/A',
+      studio: req.body.studio || 'N/A',
       status: req.body.status || 'Pending'
     };
     
     bookings.push(newBooking);
-    res.status(201).json({ message: "Booking Request Sent!", booking: newBooking });
+    res.status(201).json(newBooking);
   } catch (error) {
     res.status(500).json({ error: "Failed to create booking" });
   }
 });
 
-// 2. Fetch All Bookings
+// 2. Get All Bookings
 app.get('/bookings', (req, res) => {
   res.status(200).json(bookings);
 });
