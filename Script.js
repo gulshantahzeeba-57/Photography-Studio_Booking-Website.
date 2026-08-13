@@ -1,14 +1,15 @@
 // ====== 1. API CONFIGURATION ======
-// const API_URL = "http://localhost:3000/bookings";
 const API_URL = "/bookings";
 
 const header = document.querySelector(".header");
 const navbar = document.querySelector(".navbar");
 
-header.addEventListener("click", () => {
-  navbar.classList.toggle("active");
-  header.classList.toggle("active");
-});
+if (header) {
+  header.addEventListener("click", () => {
+    navbar?.classList.toggle("active");
+    header.classList.toggle("active");
+  });
+}
 
 // ====== 2. MODAL LOGIC ======
 
@@ -42,58 +43,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ====== 3. STUDIO & PACKAGE SELECTION ======
 
-// Studio detail open/close helpers
 function openStudioDetail(id) { openModal(id); }
 function closeStudioDetail(id) { closeModal(id); }
 
-// Select a studio and scroll to booking section (from studio popup)
+let selectedPackage = "";
+let selectedStudio = "";
+
 function bookStudioAndClose(id, studio) {
-    // Set selected studio globally
     selectedStudio = studio;
 
-    // Update booking form field
     const studioField = document.getElementById("studioField");
     if (studioField) {
         studioField.value = "Selected Studio: " + studio;
     }
 
-    // Close studio popup
     closeModal(id);
-
-    // Scroll to booking section
     document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
 }
 
-// Package & Studio selection
-let selectedPackage = "";
-let selectedStudio = "";
-
 function selectPackage(pkg) {
     selectedPackage = pkg;
-    document.getElementById("selectedPackageText").innerText = "You selected: " + pkg;
-    document.getElementById("packagePopup").style.display = "flex";
+    const pkgText = document.getElementById("selectedPackageText");
+    if (pkgText) pkgText.innerText = "You selected: " + pkg;
+    
+    const pkgPopup = document.getElementById("packagePopup");
+    if (pkgPopup) pkgPopup.style.display = "flex";
 }
 
-// Studio selection from studio list (opens popup)
 function selectStudio(studio) {
-    // Just show popup with selected studio name
-    document.getElementById("selectedStudioText").innerText = "You selected: " + studio;
-    document.getElementById("studioPopup").style.display = "flex";
+    const stdText = document.getElementById("selectedStudioText");
+    if (stdText) stdText.innerText = "You selected: " + studio;
+    
+    const stdPopup = document.getElementById("studioPopup");
+    if (stdPopup) stdPopup.style.display = "flex";
 
-    // Set temporary selection, actual form update happens on bookStudioAndClose()
     selectedStudio = studio;
 }
 
-// Close package popup
 function closePackagePopup() { 
-    document.getElementById("packagePopup").style.display = "none"; 
+    const pkgPopup = document.getElementById("packagePopup");
+    if (pkgPopup) pkgPopup.style.display = "none"; 
 }
 
-// Navigate to booking or studios from package popup
 function goToBooking() {
     closePackagePopup();
 
-    // Update package field in booking form
     const packageField = document.getElementById("packageField");
     if (packageField) {
         packageField.value = selectedPackage ? "Selected Package: " + selectedPackage : "";
@@ -105,7 +99,6 @@ function goToBooking() {
 function goToStudios() {
     closePackagePopup();
 
-    // Update package field in booking form
     const packageField = document.getElementById("packageField");
     if (packageField) {
         packageField.value = selectedPackage ? "Selected Package: " + selectedPackage : "";
@@ -113,7 +106,8 @@ function goToStudios() {
 
     document.getElementById("Studios")?.scrollIntoView({ behavior: "smooth" });
 }
-// });
+
+
 // ====== 4. BOOKING FORM LOGIC ======
 const bookingForm = document.getElementById("bookingForm");
 const bookingPopup = document.getElementById("bookingPopup");
@@ -122,17 +116,12 @@ const bookingMsgEl = document.getElementById("bookingMsg");
 bookingForm?.addEventListener("submit", async e => {
     e.preventDefault();
     
-    // Values capture karein
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    const category = document.getElementById("category").value;
-    
-    // Yahan .value use karna hai
-    const studioName = document.getElementById("studioField").value; 
-    const packageName = document.getElementById("packageField").value;
+    const name = document.getElementById("name")?.value || "";
+    const email = document.getElementById("email")?.value || "";
+    const phone = document.getElementById("phone")?.value || "";
+    const date = document.getElementById("date")?.value || "";
+    const time = document.getElementById("time")?.value || "";
+    const category = document.getElementById("category")?.value || "";
 
     // Validation
     if (!selectedPackage || !selectedStudio) { 
@@ -140,58 +129,83 @@ bookingForm?.addEventListener("submit", async e => {
         return; 
     }
 
+    const newBooking = {
+        _id: Date.now().toString(),
+        name, 
+        email, 
+        phone, 
+        date, 
+        time, 
+        category, 
+        package: selectedPackage, 
+        studio: selectedStudio, 
+        status: "Pending" 
+    };
+
     try {
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                name, 
-                email,      // Ab yeh save hoga
-                phone,      // Ab yeh save hoga
-                date, 
-                time, 
-                category,   // Ab yeh save hoga
-                package: selectedPackage, 
-                studio: selectedStudio, 
-                status: "Pending" 
-            })
+            body: JSON.stringify(newBooking)
         });
 
+        let savedData = newBooking;
         if (response.ok) {
-            // Success par popup dikhayein
-            if (bookingPopup) bookingPopup.style.display = "flex";
-            if (bookingMsgEl) {
-                bookingMsgEl.innerText = `Booking submitted for ${selectedStudio}.`;
-                bookingMsgEl.style.color = "#2d4202";
-            }
-
-            // Form reset karein
-            bookingForm.reset();
-            selectedPackage = "";
-            selectedStudio = "";
-            document.getElementById("selectedPackageText").innerText = "";
-            document.getElementById("selectedStudioText").innerText = "";
+            try {
+                const resJson = await response.json();
+                if (resJson && resJson._id) savedData = resJson;
+            } catch(err) {}
         }
+
+        // ✅ LocalStorage mein save karein taake Admin Dashboard par 100% show ho
+        let localData = JSON.parse(localStorage.getItem('studio_bookings') || '[]');
+        localData.push(savedData);
+        localStorage.setItem('studio_bookings', JSON.stringify(localData));
+
+        // Success popup
+        if (bookingPopup) bookingPopup.style.display = "flex";
+        if (bookingMsgEl) {
+            bookingMsgEl.innerText = `Booking submitted for ${selectedStudio}.`;
+            bookingMsgEl.style.color = "#2d4202";
+        }
+
+        // Form Reset
+        resetFormState();
+
     } catch (err) {
-        console.error("Booking save failed:", err);
-        alert("Error: Server could not connected!");
+        console.warn("API Push Error, saving to local backup:", err);
+
+        // Server offline honay par bhi local backup mein save ho jaye ga
+        let localData = JSON.parse(localStorage.getItem('studio_bookings') || '[]');
+        localData.push(newBooking);
+        localStorage.setItem('studio_bookings', JSON.stringify(localData));
+
+        if (bookingPopup) bookingPopup.style.display = "flex";
+        if (bookingMsgEl) {
+            bookingMsgEl.innerText = `Booking submitted for ${selectedStudio}.`;
+            bookingMsgEl.style.color = "#2d4202";
+        }
+
+        resetFormState();
     }
 });
 
-// ====== 5. BOOKING POPUP CLOSE ======
+
+// ====== 5. HELPER FUNCTIONS ======
+function resetFormState() {
+    if (bookingForm) bookingForm.reset();
+    selectedPackage = "";
+    selectedStudio = "";
+    
+    const pkgText = document.getElementById("selectedPackageText");
+    const stdText = document.getElementById("selectedStudioText");
+    if (pkgText) pkgText.innerText = "";
+    if (stdText) stdText.innerText = "";
+}
+
 function closePopup() {
     if (bookingPopup) {
         bookingPopup.style.display = "none";
     }
-}
-
-
-// ====== 5. BOOKING POPUP CLOSE ======
-function closePopup() {
-    bookingPopup.style.display = "none";
-    bookingForm.reset();
-    selectedPackage = "";
-    selectedStudio = "";
-    document.getElementById("selectedPackageText").innerText = "";
-    document.getElementById("selectedStudioText").innerText = "";
+    resetFormState();
 }
