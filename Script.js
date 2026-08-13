@@ -1,5 +1,5 @@
 // ====== 1. API CONFIGURATION ======
-const API_URL = "http://localhost:3000/bookings";
+// const API_URL = "http://localhost:3000/bookings";
 
 const header = document.querySelector(".header");
 const navbar = document.querySelector(".navbar");
